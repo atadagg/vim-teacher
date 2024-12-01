@@ -15,4 +15,7 @@
 
     <!-- Additional Grey -->
     <color name="charcoal_gray">#33373E</color>
+
+    <color name="correct_green">#4CAF50</color>
+    <color name="incorrect_red">#FF5722</color>
 </resources>
