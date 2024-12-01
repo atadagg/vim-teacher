@@ -1,6 +1,7 @@
 package com.example.vimteacher.model
 
 data class OptionModel(
-    val optionText: String,
-    val optionId: Int
+    val optionId: Int,
+    val optionBody: String,
+    val optionDescription: String,
 )

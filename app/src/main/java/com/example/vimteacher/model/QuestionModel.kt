@@ -1,8 +1,9 @@
 package com.example.vimteacher.model
 
 data class QuestionModel(
-    val questionTitle: String,
-    val questionBody: String,
-    val options: List<OptionModel> = listOf(),
-    val correctOptionId: Int = 0,
+    val questionId: Int,
+    val difficulty: DifficultyLevel,
+    val options: List<OptionModel>,
+    val correctOptionId: Int,
+    val isDone: Boolean = false,
 )
