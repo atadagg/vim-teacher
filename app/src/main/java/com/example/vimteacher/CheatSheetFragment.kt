@@ -26,20 +26,8 @@ class CheatSheetFragment : Fragment() {
         // Set the title of ActionBar to be empty or else there are two titles.
         (activity as AppCompatActivity).supportActionBar?.title = ""
 
-        // Set the status bar color to match the toolbar color
-        setStatusBarColor()
-
         return binding.root
     }
 
-    private fun setStatusBarColor() {
-        // Set the status bar color to match the toolbar color
-        val colorPrimary = resources.getColor(R.color.primary_color, null)
 
-        // Set the status bar color
-        activity?.window?.statusBarColor = colorPrimary
-
-        // Optional: Make the status bar icons light (if needed for dark backgrounds)
-        WindowInsetsControllerCompat(activity?.window!!, activity?.window?.decorView!!).isAppearanceLightStatusBars = false
-    }
 }

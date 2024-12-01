@@ -10,8 +10,9 @@
         android:id="@+id/questionId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        android:fontFamily="@font/munro"
+        android:textColor="@color/text_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Question 1" />

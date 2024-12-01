@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -27,6 +28,7 @@ class MainFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+        setStatusBarColor()
         return binding.root
     }
 
@@ -55,5 +57,16 @@ class MainFragment : Fragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun setStatusBarColor() {
+        // Set the status bar color to match the toolbar color
+        val colorPrimary = resources.getColor(R.color.primary_color, null)
+
+        // Set the status bar color
+        activity?.window?.statusBarColor = colorPrimary
+
+        // Optional: Make the status bar icons light (if needed for dark backgrounds)
+        WindowInsetsControllerCompat(activity?.window!!, activity?.window?.decorView!!).isAppearanceLightStatusBars = false
     }
 }

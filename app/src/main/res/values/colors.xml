@@ -12,4 +12,7 @@
     <!-- Additional Greens -->
     <color name="forest_green">#204134</color>
     <color name="emerald_green">#019833</color>
+
+    <!-- Additional Grey -->
+    <color name="charcoal_gray">#33373E</color>
 </resources>
