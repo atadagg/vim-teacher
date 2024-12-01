@@ -1,5 +1,6 @@
 package com.example.vimteacher
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -43,6 +44,7 @@ class QuestionFragment : Fragment() {
             container.removeAllViews()
             question.options.forEach{ option ->
                 val radioButton = RadioButton(requireContext()).apply {
+                    id = option.optionId
                     text = option.optionBody
                     setTextColor(ResourcesCompat.getColorStateList(resources, R.color.radio_button_text_color, null))
                     buttonTintList = ResourcesCompat.getColorStateList(resources, R.color.radio_button_text_color, null)
@@ -57,15 +59,30 @@ class QuestionFragment : Fragment() {
                         LinearLayout.LayoutParams.WRAP_CONTENT
                     )
                 }
-                container.addView(explanationView)  // Add to container instead of CardView
+                container.addView(explanationView)
             }
 
             binding.questionBody.text = question.questionBody
         }
 
         binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            question?.options?.forEach{ option ->
-                binding.explanationsCard.visibility = View.VISIBLE
+            binding.explanationsCard.visibility = View.VISIBLE
+
+            val selectedRadioButton = group.findViewById<RadioButton>(checkedId)
+
+            // Handle all radio buttons
+            for (i in 0 until group.childCount) {
+                val radioButton = group.getChildAt(i) as RadioButton
+
+                if (radioButton.id == question?.correctOptionId) {
+                    radioButton.isEnabled = true
+                    radioButton.isChecked = true  // Show that this was the correct answer
+                }
+                // If this was selected and it's wrong, make it red
+                else if (radioButton == selectedRadioButton) {
+                    radioButton.isEnabled = false
+                    radioButton.isChecked = true
+                }
             }
         }
     }
