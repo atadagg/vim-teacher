@@ -13,7 +13,7 @@ class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : Recy
     inner class QuestionViewHolder(private val binding: QuestionItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root){
             fun bind(question: QuestionModel){
-                binding.questionId.text = question.questionId.toString()
+                binding.questionId.text = "Question ${question.questionId}"
                 itemView.setOnClickListener {
                     onItemClick(question)
                 }

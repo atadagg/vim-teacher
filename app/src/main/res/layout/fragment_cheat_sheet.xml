@@ -38,25 +38,16 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:="4dp"
-                    android:cardElevation="4dp"
+                    android:text="Movement"
+                    android:textSize="24sp"
                     android:layout_gravity="center"
-                    android:layout_marginBottom="16dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Movement"
-                        android:textSize="24sp"
-                        android:layout_gravity="center"
-                        android:fontFamily="@font/munro"
-                        android:textColor="@color/text_color"
-                        android:textStyle="bold"
-                        android:padding="16dp"/>
-                </androidx.cardview.widget.CardView>
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:padding="16dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"

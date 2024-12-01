@@ -6,6 +6,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class QuestionModel(
     val questionId: Int,
+    val questionBody: String,
     val difficulty: DifficultyLevel,
     val options: List<OptionModel>,
     val correctOptionId: Int,

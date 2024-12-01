@@ -34,6 +34,9 @@ class MainFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         observeViewModel()
+        binding.buttonCheatSheet.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToCheatSheetFragment())
+        }
     }
 
 

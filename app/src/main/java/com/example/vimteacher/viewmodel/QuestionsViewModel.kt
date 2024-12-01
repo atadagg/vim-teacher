@@ -19,6 +19,7 @@ class QuestionsViewModel : ViewModel() {
         val questionList = listOf(
             QuestionModel(
                 questionId = 1,
+                questionBody = "In Vim's normal mode, which command sequence would you use to move the current line one line down (i.e., swap the current line with the line below it)?",
                 difficulty = DifficultyLevel.EASY,
                 options = listOf(
                     OptionModel(1, "ddp", "Delete line and put it below the cursor position"),
@@ -30,6 +31,7 @@ class QuestionsViewModel : ViewModel() {
             ),
             QuestionModel(
                 questionId = 2,
+                questionBody = "Which Vim command would you use to replace an entire word under the cursor, regardless of where the cursor is positioned within that word?",
                 difficulty = DifficultyLevel.MEDIUM,
                 options = listOf(
                     OptionModel(1, "ciw", "Change inner word"),
@@ -41,6 +43,7 @@ class QuestionsViewModel : ViewModel() {
             ),
             QuestionModel(
                 questionId = 3,
+                questionBody = "In Vim, which command can be used to ROT13 encode the text under the cursor, a technique sometimes used to obscure text like spoilers or solutions?",
                 difficulty = DifficultyLevel.HARD,
                 options = listOf(
                     OptionModel(1, "g?", "Search backward"),
@@ -52,6 +55,7 @@ class QuestionsViewModel : ViewModel() {
             ),
             QuestionModel(
                 questionId = 4,
+                questionBody = "In Vim, which command can be used to ROT13 encode the text under the cursor, a technique sometimes used to obscure text like spoilers or solutions?",
                 difficulty = DifficultyLevel.HARD,
                 options = listOf(
                     OptionModel(1, "g?", "Search backward"),

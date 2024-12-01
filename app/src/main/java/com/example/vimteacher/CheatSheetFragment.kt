@@ -29,9 +29,6 @@ class CheatSheetFragment : Fragment() {
         // Set the status bar color to match the toolbar color
         setStatusBarColor()
 
-        // Optionally, enable the back button
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         return binding.root
     }
 

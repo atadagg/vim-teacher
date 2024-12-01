@@ -39,12 +39,13 @@ class QuestionFragment : Fragment() {
                 radioButton.text = option.optionBody
                 binding.radioGroup.addView(radioButton)
             }
+            binding.questionBody.text = question.questionBody
         }
-        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            if (question != null && checkedId == question.questionId) {
-                TODO("TO BE CONTINUED IN PART 2")
-            }
-        }
+//        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
+//            if (question != null && checkedId == question.questionId) {
+//                TODO("TO BE CONTINUED IN PART 2")
+//            }
+//        }
     }
 
 
