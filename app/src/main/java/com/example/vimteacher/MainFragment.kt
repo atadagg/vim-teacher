@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.vimteacher.adapter.QuestionAdapter
 import com.example.vimteacher.databinding.FragmentMainBinding
 import com.example.vimteacher.viewmodel.QuestionsViewModel
@@ -14,7 +15,10 @@ class MainFragment : Fragment(){
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
-    private val adapter = QuestionAdapter()
+    private val adapter = QuestionAdapter { question ->
+        // Navigate to question fragment
+        findNavController().navigate(MainFragmentDirections.actionMainFragmentToQuestionFragment(id = question.questionId))
+    }
     private val viewModel: QuestionsViewModel by viewModels()
 
     override fun onCreateView(

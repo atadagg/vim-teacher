@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.vimteacher.databinding.QuestionItemLayoutBinding
 import com.example.vimteacher.model.QuestionModel
 
-class QuestionAdapter : RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> (){
+class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> (){
 
     private var questions = listOf<QuestionModel>()
 
@@ -14,6 +14,9 @@ class QuestionAdapter : RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder>
         RecyclerView.ViewHolder(binding.root){
             fun bind(question: QuestionModel){
                 binding.questionId.text = question.questionId.toString()
+                itemView.setOnClickListener {
+                    onItemClick(question)
+                }
             }
     }
 

@@ -2,11 +2,13 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.androidx.navigation.safe.args)
+    alias(libs.plugins.kotlin.parcelize)
 }
 
 android {
     namespace = "com.example.vimteacher"
     compileSdk = 34
+
 
     defaultConfig {
         applicationId = "com.example.vimteacher"

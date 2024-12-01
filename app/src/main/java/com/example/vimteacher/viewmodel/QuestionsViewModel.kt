@@ -80,8 +80,12 @@ class QuestionsViewModel : ViewModel() {
         return allQuestionsLiveData.value?.filter { it.difficulty == difficulty }
     }
 
+
     // Function to set the current question (when the user selects a question)
-    fun setCurrentQuestion(question: QuestionModel) {
-        currentQuestionLiveData.value = question
+    fun getQuestionById(id: Int) : QuestionModel? {
+        return allQuestionsLiveData.value?.find { it.questionId == id }
+    }
+    fun setQuestionById(id: Int){
+        currentQuestionLiveData.value = allQuestionsLiveData.value?.find { it.questionId == id }
     }
 }
