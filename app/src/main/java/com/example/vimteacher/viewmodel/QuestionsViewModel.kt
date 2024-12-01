@@ -49,6 +49,17 @@ class QuestionsViewModel : ViewModel() {
                     OptionModel(4, "gd", "Go to definition")
                 ),
                 correctOptionId = 1
+            ),
+            QuestionModel(
+                questionId = 4,
+                difficulty = DifficultyLevel.HARD,
+                options = listOf(
+                    OptionModel(1, "g?", "Search backward"),
+                    OptionModel(2, "g/", "Search forward"),
+                    OptionModel(3, "gg", "Go to the beginning of the file"),
+                    OptionModel(4, "gd", "Go to definition")
+                ),
+                correctOptionId = 1
             )
         )
 
