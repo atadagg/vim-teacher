@@ -49,7 +49,7 @@ class MainFragment : Fragment(){
 
 
     private fun observeViewModel(){
-        viewModel.getAllQuestions().observe(viewLifecycleOwner) { questions ->
+        viewModel.questions.observe(viewLifecycleOwner) { questions ->
             adapter.submitList(questions)
         }
     }

@@ -1,5 +1,6 @@
 package com.example.vimteacher.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.vimteacher.model.DifficultyLevel
@@ -9,7 +10,8 @@ import com.example.vimteacher.model.QuestionModel
 class QuestionsViewModel : ViewModel() {
 
     // LiveData to hold all questions
-    private val allQuestionsLiveData = MutableLiveData<List<QuestionModel>>()
+    private val _allQuestionsLiveData = MutableLiveData<List<QuestionModel>>()
+    val questions: LiveData<List<QuestionModel>> = _allQuestionsLiveData
 
     // LiveData for the current question the user is interacting with
     val currentQuestionLiveData = MutableLiveData<QuestionModel>()
@@ -236,28 +238,23 @@ class QuestionsViewModel : ViewModel() {
         )
 
         // Set all questions
-        allQuestionsLiveData.value = questionList
+        _allQuestionsLiveData.value = questionList
 
         // Set the first question as the current question (or some default)
         currentQuestionLiveData.value = questionList.first()
     }
 
-    // Function to get all questions
-    fun getAllQuestions(): MutableLiveData<List<QuestionModel>> {
-        return allQuestionsLiveData
-    }
-
     // Function to get questions filtered by difficulty
     fun getQuestionsByDifficulty(difficulty: DifficultyLevel): List<QuestionModel>? {
-        return allQuestionsLiveData.value?.filter { it.difficulty == difficulty }
+        return _allQuestionsLiveData.value?.filter { it.difficulty == difficulty }
     }
 
 
     // Function to set the current question (when the user selects a question)
     fun getQuestionById(id: Int) : QuestionModel? {
-        return allQuestionsLiveData.value?.find { it.questionId == id }
+        return _allQuestionsLiveData.value?.find { it.questionId == id }
     }
     fun setQuestionById(id: Int){
-        currentQuestionLiveData.value = allQuestionsLiveData.value?.find { it.questionId == id }
+        currentQuestionLiveData.value = _allQuestionsLiveData.value?.find { it.questionId == id }
     }
 }

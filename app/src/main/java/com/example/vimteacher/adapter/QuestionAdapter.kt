@@ -2,13 +2,24 @@ package com.example.vimteacher.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.vimteacher.databinding.QuestionItemLayoutBinding
 import com.example.vimteacher.model.QuestionModel
 
-class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : RecyclerView.Adapter<QuestionAdapter.QuestionViewHolder> (){
+class QuestionDiffCallback : DiffUtil.ItemCallback<QuestionModel>() {
+    override fun areItemsTheSame(oldItem: QuestionModel, newItem: QuestionModel): Boolean {
+        return oldItem.questionId == newItem.questionId
+    }
 
-    private var questions = listOf<QuestionModel>()
+    override fun areContentsTheSame(oldItem: QuestionModel, newItem: QuestionModel): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : ListAdapter<QuestionModel, QuestionAdapter.QuestionViewHolder>(QuestionDiffCallback()){
+
 
     inner class QuestionViewHolder(private val binding: QuestionItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root){
@@ -31,18 +42,6 @@ class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : Recy
     }
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
-        holder.bind(questions[position])
+        holder.bind(getItem(position))
     }
-
-    override fun getItemCount() = questions.size
-
-
-    fun submitList(newQuestions: List<QuestionModel>){
-        questions = newQuestions
-        notifyDataSetChanged()
-    }
-
-
-
-
 }
