@@ -17,7 +17,6 @@ class MainFragment : Fragment(){
     private val binding get() = _binding!!
 
     private val adapter = QuestionAdapter { question ->
-        // Navigate to question fragment
         findNavController().navigate(MainFragmentDirections.actionMainFragmentToQuestionFragment(id = question.questionId))
     }
     private val viewModel: QuestionsViewModel by viewModels()
@@ -60,13 +59,8 @@ class MainFragment : Fragment(){
     }
 
     private fun setStatusBarColor() {
-        // Set the status bar color to match the toolbar color
         val colorPrimary = resources.getColor(R.color.primary_color, null)
-
-        // Set the status bar color
         activity?.window?.statusBarColor = colorPrimary
-
-        // Optional: Make the status bar icons light (if needed for dark backgrounds)
         WindowInsetsControllerCompat(activity?.window!!, activity?.window?.decorView!!).isAppearanceLightStatusBars = false
     }
 }

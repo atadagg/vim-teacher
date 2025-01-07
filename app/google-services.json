@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "109820357256",
+    "project_id": "vim-teacher",
+    "storage_bucket": "vim-teacher.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109820357256:android:c7e00122e0d0ead3f30d3d",
+        "android_client_info": {
+          "package_name": "com.example.vimteacher"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQR7NrT6z_xs1AtFr_N0D49pGRM5xpVj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
