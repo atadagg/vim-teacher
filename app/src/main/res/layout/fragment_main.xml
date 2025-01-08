@@ -56,11 +56,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             app:questionList="@{viewModel.questions}"
             app:layout_constraintTop_toBottomOf="@id/buttonCheatSheet"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-            app:spanCount="3" />
+            app:spanCount="4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

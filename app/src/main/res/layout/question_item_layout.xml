@@ -3,17 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="72dp"
+    android:layout_height="72dp"
     android:layout_margin="8dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
-    app:cardBackgroundColor="@color/primary_color">
+    app:cardBackgroundColor="@color/primary_color"
+    app:strokeWidth="0dp">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="match_parent">
 
         <TextView
             android:id="@+id/questionId"
@@ -23,8 +24,10 @@
             android:fontFamily="@font/munro"
             android:textColor="@color/text_color"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Question 1" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="1" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

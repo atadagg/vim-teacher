@@ -24,7 +24,7 @@ class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : List
     inner class QuestionViewHolder(private val binding: QuestionItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root){
             fun bind(question: QuestionModel){
-                binding.questionId.text = "Question ${question.questionId}"
+                binding.questionId.text = question.questionId.toString()
                 itemView.setOnClickListener {
                     onItemClick(question)
                 }

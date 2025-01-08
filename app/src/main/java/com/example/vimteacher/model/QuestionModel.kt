@@ -5,10 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class QuestionModel(
-    val questionId: Int,
-    val questionBody: String,
-    val difficulty: DifficultyLevel,
-    val options: List<OptionModel>,
-    val correctOptionId: Int,
+    val questionId: Int = 0,
+    val questionBody: String = "",
+    val difficulty: DifficultyLevel = DifficultyLevel.EASY,
+    val options: List<OptionModel> = emptyList(),
+    val correctOptionId: Int = 0,
     val isDone: Boolean = false,
 ) : Parcelable
