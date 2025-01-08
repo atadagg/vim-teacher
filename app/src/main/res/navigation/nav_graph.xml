@@ -36,5 +36,17 @@
         android:label="Cheat Sheet Fragment"
         tools:layout="@layout/fragment_cheat_sheet" />
 
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.vimteacher.LoginFragment"
+        android:label="Login">
+        <action
+            android:id="@+id/actionLoginFragmentToRegisterFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/actionLoginFragmentToMainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
 
 </navigation>
