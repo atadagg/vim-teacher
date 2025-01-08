@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Vim Teacher</string>
+    <string name="skip_text"><u>- Skip -</u></string>
 </resources>

@@ -1,11 +1,11 @@
 package com.example.vimteacher
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -13,8 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.vimteacher.databinding.FragmentQuestionBinding
+import com.example.vimteacher.model.QuestionModel
 import com.example.vimteacher.viewmodel.QuestionsViewModel
-
 
 class QuestionFragment : Fragment() {
     private var _binding: FragmentQuestionBinding? = null
@@ -24,9 +24,7 @@ class QuestionFragment : Fragment() {
     private val viewModel: QuestionsViewModel by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
         _binding = FragmentQuestionBinding.inflate(inflater, container, false)
         return binding.root
@@ -35,69 +33,123 @@ class QuestionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel.setQuestionById(args.id)
 
+        observeViewModel()
 
-        viewModel.currentQuestionLiveData.observe(viewLifecycleOwner) { question ->
-            if (question != null) {
-                binding.questionId.id = question.questionId
-                binding.radioGroup.removeAllViews()
-                val container = binding.explanationsCard.findViewById<LinearLayout>(R.id.explanationsContainer)
-                container.removeAllViews()
-                question.options.forEach { option ->
-                    val radioButton = RadioButton(requireContext()).apply {
-                        id = option.optionId
-                        text = option.optionBody
-                        setTextColor(ResourcesCompat.getColorStateList(resources, R.color.radio_button_text_color, null))
-                        buttonTintList = ResourcesCompat.getColorStateList(resources, R.color.radio_button_text_color, null)
-                    }
-                    binding.radioGroup.addView(radioButton)
-                    val explanationView = TextView(requireContext()).apply {
-                        text = option.optionDescription
-                        textSize = 16f
-                        setPadding(16, 8, 16, 8)
-                        layoutParams = LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                        )
-                    }
-                    container.addView(explanationView)
-                }
-                binding.questionBody.text = question.questionBody
+        binding.answerButton.setOnClickListener {
+            if (viewModel.isAnswered.value == true) {
+                handleNext()
             } else {
-                Log.e("QuestionFragment", "Question is null")
+                handleAnswer()
             }
         }
 
-        binding.radioGroup.setOnCheckedChangeListener { group, checkedId ->
-            binding.explanationsCard.visibility = View.VISIBLE
-            val selectedRadioButton = group.findViewById<RadioButton>(checkedId)
-            val currentQuestion = viewModel.currentQuestionLiveData.value
-            if (currentQuestion != null) {
-                for (i in 0 until group.childCount) {
-                    val radioButton = group.getChildAt(i) as RadioButton
-                    if (radioButton.id == currentQuestion.correctOptionId) {
-                        radioButton.isEnabled = true
-                        radioButton.isChecked = true
-                    } else if (radioButton == selectedRadioButton) {
-                        radioButton.isEnabled = false
-                        radioButton.isChecked = true
-                    }
-                }
+        binding.skipButton.setOnClickListener {
+            handleNext()
+        }
+    }
+
+    private fun observeViewModel() {
+        viewModel.currentQuestionLiveData.observe(viewLifecycleOwner) { question ->
+            if (question != null) {
+                binding.questionId.text = "Question ${question.questionId}"
+                binding.questionBody.text = question.questionBody
+                setupOptions(question)
+            }
+        }
+
+        viewModel.optionStatuses.observe(viewLifecycleOwner) { statuses ->
+            statuses?.let { updateOptionStatuses(it) }
+        }
+
+        viewModel.explanations.observe(viewLifecycleOwner) { explanations ->
+            if (explanations != null) showExplanations(explanations)
+        }
+
+        viewModel.isAnswered.observe(viewLifecycleOwner) { answered ->
+            if (answered) {
+                binding.skipButton.visibility = View.GONE
+                binding.answerButton.text = "Next"
             } else {
-                Log.e("QuestionFragment", "Current question is null during radio group change")
+                binding.skipButton.visibility = View.VISIBLE
+                binding.answerButton.text = "Answer"
             }
         }
     }
 
+    private fun setupOptions(question: QuestionModel) {
+        binding.radioGroup.removeAllViews()
+        question.options.forEach { option ->
+            val radioButton = RadioButton(requireContext()).apply {
+                id = option.optionId
+                text = option.optionBody
+                setTextColor(ResourcesCompat.getColorStateList(resources, R.color.text_color, null))
+                isEnabled = true
+            }
+            binding.radioGroup.addView(radioButton)
+        }
+    }
 
+    private fun updateOptionStatuses(statuses: Map<Int, String>) {
+        for (i in 0 until binding.radioGroup.childCount) {
+            val radioButton = binding.radioGroup.getChildAt(i) as RadioButton
+            val status = statuses[radioButton.id]
+            if (status != null) {
+                radioButton.text = "${radioButton.text}, $status"
+                radioButton.setTextColor(
+                    if (status == "Correct")
+                        ResourcesCompat.getColor(resources, R.color.correct_green, null)
+                    else
+                        ResourcesCompat.getColor(resources, R.color.incorrect_red, null)
+                )
+                radioButton.isEnabled = false
+            }
+        }
+    }
+
+    private fun handleAnswer() {
+        val selectedOptionId = binding.radioGroup.checkedRadioButtonId
+        if (selectedOptionId == -1) {
+            // No option selected
+            return
+        }
+        viewModel.checkAnswer(selectedOptionId)
+    }
+
+    private fun handleNext() {
+        if (viewModel.hasNextQuestion()) {
+            viewModel.nextQuestion()
+        } else {
+            showNoMoreQuestionsDialog()
+        }
+    }
+    private fun showExplanations(explanations: List<String>) {
+        binding.explanationsCard.visibility = View.VISIBLE
+        val container = binding.explanationsContainer
+        container.removeAllViews()
+        explanations.forEach { explanation ->
+            val textView = TextView(requireContext()).apply {
+                text = explanation
+                textSize = 16f
+                setPadding(16, 8, 16, 8)
+            }
+            container.addView(textView)
+        }
+    }
+
+    private fun showNoMoreQuestionsDialog() {
+        AlertDialog.Builder(requireContext())
+            .setTitle("No More Questions")
+            .setMessage("There are no any questions after this question")
+            .setPositiveButton("OK") { dialog, _ ->
+                dialog.dismiss()
+            }
+            .show()
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
-
-
 }

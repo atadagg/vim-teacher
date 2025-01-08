@@ -12,11 +12,15 @@ import kotlinx.coroutines.launch
 class QuestionsViewModel : ViewModel() {
 
     private val firebaseService = FirebaseService()
-
     private val _allQuestionsLiveData = MutableLiveData<List<QuestionModel>>()
     val questions: LiveData<List<QuestionModel>> = _allQuestionsLiveData
 
     val currentQuestionLiveData = MutableLiveData<QuestionModel>()
+    val explanations = MutableLiveData<List<String>>()
+    val optionStatuses = MutableLiveData<Map<Int, String>>() // Maps optionId to "Correct" or "Incorrect"
+    val isAnswered = MutableLiveData<Boolean>().apply { value = false }
+
+    private var currentIndex = 0 // Index to track the current question
 
     init {
         fetchQuestions()
@@ -28,20 +32,63 @@ class QuestionsViewModel : ViewModel() {
                 val questionsList = firebaseService.getQuestions()
                 _allQuestionsLiveData.value = questionsList
 
-                // Set the first question as the current question
                 if (questionsList.isNotEmpty()) {
-                    currentQuestionLiveData.value = questionsList.first()
+                    currentIndex = 0
+                    currentQuestionLiveData.value = questionsList[currentIndex]
                 }
             } catch (e: Exception) {
                 Log.e("QuestionsViewModel", "Error fetching questions from Firebase", e)
             }
         }
     }
-    fun getQuestionById(id: Int) : QuestionModel? {
-        return _allQuestionsLiveData.value?.find { it.questionId == id }
-    }
 
     fun setQuestionById(id: Int) {
-        currentQuestionLiveData.value = _allQuestionsLiveData.value?.find { it.questionId == id }
+        currentIndex = _allQuestionsLiveData.value?.indexOfFirst { it.questionId == id } ?: 0
+        updateCurrentQuestion()
+    }
+
+    fun checkAnswer(selectedOptionId: Int): Boolean {
+        val currentQuestion = currentQuestionLiveData.value ?: return false
+
+        val statuses = currentQuestion.options.associate { option ->
+            option.optionId to if (option.optionId == currentQuestion.correctOptionId) {
+                "Correct"
+            } else {
+                "Incorrect"
+            }
+        }
+
+        optionStatuses.value = statuses
+
+        explanations.value = currentQuestion.options.map { option ->
+            "${option.optionBody}: ${option.optionDescription}"
+        }
+
+        isAnswered.value = true
+        return true
+    }
+
+    fun hasNextQuestion(): Boolean {
+        val questionsList = _allQuestionsLiveData.value ?: return false
+        return currentIndex < questionsList.size - 1
+    }
+
+    fun nextQuestion() {
+        val questionsList = _allQuestionsLiveData.value ?: return
+
+        if (currentIndex < questionsList.size - 1) {
+            currentIndex++
+            updateCurrentQuestion()
+        }
+    }
+
+    private fun updateCurrentQuestion() {
+        val questionsList = _allQuestionsLiveData.value ?: return
+        if (currentIndex in questionsList.indices) {
+            currentQuestionLiveData.value = questionsList[currentIndex]
+            isAnswered.value = false
+            optionStatuses.value = emptyMap()
+            explanations.value = emptyList()
+        }
     }
 }
