@@ -2,12 +2,37 @@ package com.example.vimteacher.services
 
 import android.util.Log
 import com.example.vimteacher.model.QuestionModel
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 
 class FirebaseService {
 
     private val db = FirebaseFirestore.getInstance()
+    private val auth = FirebaseAuth.getInstance()
+
+    suspend fun loginUser(email: String, password: String): Result<FirebaseUser> {
+        return try {
+            val result = auth.signInWithEmailAndPassword(email, password).await()
+            result.user?.let {
+                Result.success(it)
+            } ?: Result.failure(Exception("Authentication failed"))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun registerUser(email: String, password: String): Result<FirebaseUser> {
+        return try {
+            val result = auth.createUserWithEmailAndPassword(email, password).await()
+            result.user?.let {
+                Result.success(it)
+            } ?: Result.failure(Exception("Registration failed"))
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 
     suspend fun getQuestions(): List<QuestionModel> {
         return try {

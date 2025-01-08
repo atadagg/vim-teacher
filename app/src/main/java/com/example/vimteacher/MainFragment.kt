@@ -38,6 +38,9 @@ class MainFragment : Fragment(){
         binding.buttonCheatSheet.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToCheatSheetFragment())
         }
+        binding.buttonLogin.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLoginFragment())
+        }
     }
 
 
