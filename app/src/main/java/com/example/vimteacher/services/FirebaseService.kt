@@ -148,6 +148,66 @@ class FirebaseService {
                     mapOf("optionId" to 4, "optionBody" to "ci(", "optionDescription" to "Change inner parentheses")
                 ),
                 "correctOptionId" to 1
+            ),
+            mapOf(
+                "questionId" to 3,
+                "questionBody" to "In Vim, what command would you use to join the current line with the line below it, adding a single space between them?",
+                "difficulty" to "EASY",
+                "options" to listOf(
+                    mapOf("optionId" to 1, "optionBody" to "J", "optionDescription" to "Join lines with space"),
+                    mapOf("optionId" to 2, "optionBody" to "gJ", "optionDescription" to "Join lines without space"),
+                    mapOf("optionId" to 3, "optionBody" to "K", "optionDescription" to "Move up and join lines"),
+                    mapOf("optionId" to 4, "optionBody" to "C", "optionDescription" to "Change to end of line")
+                ),
+                "correctOptionId" to 1
+            ),
+            mapOf(
+                "questionId" to 4,
+                "questionBody" to "Which command sequence would delete all text from the cursor position to the first occurrence of the character 'x' on the current line?",
+                "difficulty" to "MEDIUM",
+                "options" to listOf(
+                    mapOf("optionId" to 1, "optionBody" to "d/x", "optionDescription" to "Delete until search pattern 'x'"),
+                    mapOf("optionId" to 2, "optionBody" to "dtx", "optionDescription" to "Delete until (not including) character 'x'"),
+                    mapOf("optionId" to 3, "optionBody" to "dfx", "optionDescription" to "Delete including character 'x'"),
+                    mapOf("optionId" to 4, "optionBody" to "dFx", "optionDescription" to "Delete backwards to character 'x'")
+                ),
+                "correctOptionId" to 2
+            ),
+            mapOf(
+                "questionId" to 5,
+                "questionBody" to "What command would you use to copy (yank) all text between paired curly braces { }, including the braces themselves?",
+                "difficulty" to "HARD",
+                "options" to listOf(
+                    mapOf("optionId" to 1, "optionBody" to "yi{", "optionDescription" to "Yank inner curly braces"),
+                    mapOf("optionId" to 2, "optionBody" to "ya{", "optionDescription" to "Yank around curly braces"),
+                    mapOf("optionId" to 3, "optionBody" to "yib", "optionDescription" to "Yank inner block"),
+                    mapOf("optionId" to 4, "optionBody" to "y%", "optionDescription" to "Yank to matching bracket")
+                ),
+                "correctOptionId" to 2
+            ),
+            mapOf(
+                "questionId" to 6,
+                "questionBody" to "Which command would you use to replace every occurrence of the word 'foo' with 'bar' in the entire file, but ask for confirmation before each replacement?",
+                "difficulty" to "MEDIUM",
+                "options" to listOf(
+                    mapOf("optionId" to 1, "optionBody" to ":%s/foo/bar/g", "optionDescription" to "Global substitute without confirmation"),
+                    mapOf("optionId" to 2, "optionBody" to ":%s/foo/bar/gc", "optionDescription" to "Global substitute with confirmation"),
+                    mapOf("optionId" to 3, "optionBody" to ":g/foo/s//bar/g", "optionDescription" to "Global search and substitute"),
+                    mapOf("optionId" to 4, "optionBody" to ":g/foo/s//bar/gc", "optionDescription" to "Global search and substitute with confirmation")
+                ),
+                "correctOptionId" to 2
+            ),
+            mapOf(
+                "questionId" to 7,
+                "questionBody" to "What command would you use to delete all text from the current line to the end of the file?",
+                "difficulty" to "HARD",
+                "options" to listOf(
+                    mapOf("optionId" to 1, "optionBody" to "dG", "optionDescription" to "Delete to end of file"),
+                    mapOf("optionId" to 2, "optionBody" to "D$", "optionDescription" to "Delete to end of line"),
+                    mapOf("optionId" to 3, "optionBody" to "d1G", "optionDescription" to "Delete to beginning of file"),
+                    mapOf("optionId" to 4, "optionBody" to "d%", "optionDescription" to "Delete to matching bracket")
+                ),
+                "correctOptionId" to 1
             )
         )
 

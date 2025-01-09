@@ -30,12 +30,9 @@ class QuestionsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val questionsList = firebaseService.getQuestions()
-                _allQuestionsLiveData.value = questionsList
+                val sortedQuestionsList = questionsList.sortedBy { it.questionId }
+                _allQuestionsLiveData.value = sortedQuestionsList
 
-                if (questionsList.isNotEmpty()) {
-                    currentIndex = 0
-                    currentQuestionLiveData.value = questionsList[currentIndex]
-                }
             } catch (e: Exception) {
                 Log.e("QuestionsViewModel", "Error fetching questions from Firebase", e)
             }
@@ -43,8 +40,23 @@ class QuestionsViewModel : ViewModel() {
     }
 
     fun setQuestionById(id: Int) {
-        currentIndex = _allQuestionsLiveData.value?.indexOfFirst { it.questionId == id } ?: 0
-        updateCurrentQuestion()
+        viewModelScope.launch {
+            // Wait for questions to be loaded if they haven't been yet
+            if (_allQuestionsLiveData.value == null) {
+                try {
+                    val questionsList = firebaseService.getQuestions()
+                    _allQuestionsLiveData.value = questionsList
+                } catch (e: Exception) {
+                    Log.e("QuestionsViewModel", "Error fetching questions", e)
+                    return@launch
+                }
+            }
+
+            // Now find the question with matching ID
+            currentIndex = _allQuestionsLiveData.value?.indexOfFirst { it.questionId == id } ?: return@launch
+            Log.d("QuestionsViewModel", "Setting to question ID $id at index $currentIndex")
+            updateCurrentQuestion()
+        }
     }
 
     fun checkAnswer(selectedOptionId: Int): Boolean {

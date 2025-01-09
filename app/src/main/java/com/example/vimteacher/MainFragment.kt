@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vimteacher.adapter.QuestionAdapter
 import com.example.vimteacher.databinding.FragmentMainBinding
+import com.example.vimteacher.services.FirebaseService
 import com.example.vimteacher.viewmodel.AuthViewModel
 import com.example.vimteacher.viewmodel.AuthViewModelFactory
 import com.example.vimteacher.viewmodel.QuestionsViewModel
