@@ -6,12 +6,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vimteacher.model.QuestionModel
-import com.example.vimteacher.services.FirebaseService
+import com.example.vimteacher.repositories.FirebaseRepository
 import kotlinx.coroutines.launch
 
 class QuestionsViewModel : ViewModel() {
 
-    private val firebaseService = FirebaseService()
+    private val firebaseRepository = FirebaseRepository()
     private val _allQuestionsLiveData = MutableLiveData<List<QuestionModel>>()
     private val _solvedQuestions = MutableLiveData<Set<Int>>(setOf())
     val questions: LiveData<List<QuestionModel>> = _allQuestionsLiveData
@@ -32,7 +32,7 @@ class QuestionsViewModel : ViewModel() {
     private fun fetchQuestions() {
         viewModelScope.launch {
             try {
-                val questionsList = firebaseService.getQuestions()
+                val questionsList = firebaseRepository.getQuestions()
                 _allQuestionsLiveData.value = questionsList
 
             } catch (e: Exception) {
@@ -46,7 +46,7 @@ class QuestionsViewModel : ViewModel() {
             // Wait for questions to be loaded if they haven't been yet
             if (_allQuestionsLiveData.value == null) {
                 try {
-                    val questionsList = firebaseService.getQuestions()
+                    val questionsList = firebaseRepository.getQuestions()
                     _allQuestionsLiveData.value = questionsList
                 } catch (e: Exception) {
                     Log.e("QuestionsViewModel", "Error fetching questions", e)
@@ -84,7 +84,7 @@ class QuestionsViewModel : ViewModel() {
         if (isCorrect) {
             viewModelScope.launch {
                 currentQuestion.questionId?.let { questionId ->
-                    firebaseService.checkAndUpdateSolvedQuestion(questionId)
+                    firebaseRepository.checkAndUpdateSolvedQuestion(questionId)
                         .onSuccess { isNewlySolved ->
                             Log.d("QuestionsViewModel", "Question solved status updated: $isNewlySolved")
                         }
@@ -123,7 +123,7 @@ class QuestionsViewModel : ViewModel() {
     }
 
     fun observeSolvedQuestions(userId: String) {
-        firebaseService.observeSolvedQuestions(userId) { solvedIds ->
+        firebaseRepository.observeSolvedQuestions(userId) { solvedIds ->
             _solvedQuestions.value = solvedIds
         }
     }

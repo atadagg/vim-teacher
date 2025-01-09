@@ -6,9 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
-import com.example.vimteacher.R
 import com.example.vimteacher.databinding.FragmentCheatSheetBinding
 
 class CheatSheetFragment : Fragment() {
@@ -16,7 +14,7 @@ class CheatSheetFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding = FragmentCheatSheetBinding.inflate(inflater, container, false)
 
         // Set up the Toolbar as ActionBar

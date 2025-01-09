@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Vim Teacher</string>
     <string name="skip_text"><u>- Skip -</u></string>
+    <string name="question_text">Question %1$d</string>
+    <string name="next_button">Next</string>
+    <string name="answer_button">Answer</string>
 </resources>

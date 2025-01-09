@@ -6,11 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.vimteacher.model.UserModel
-import com.example.vimteacher.services.FirebaseService
+import com.example.vimteacher.repositories.FirebaseRepository
 import kotlinx.coroutines.launch
 
 class LeaderboardViewModel : ViewModel() {
-    private val firebaseService = FirebaseService()
+    private val firebaseRepository = FirebaseRepository()
 
     private val _leaderboardUsers = MutableLiveData<List<UserModel>>()
     val leaderboardUsers: LiveData<List<UserModel>> = _leaderboardUsers
@@ -22,7 +22,7 @@ class LeaderboardViewModel : ViewModel() {
     fun fetchLeaderboardUsers() {
         viewModelScope.launch {
             try {
-                val usersList = firebaseService.getLeaderboardUsers()
+                val usersList = firebaseRepository.getLeaderboardUsers()
                 val sortedUsersList = usersList.sortedByDescending { it.questions_solved }
 
                 // Limit to top 10 users

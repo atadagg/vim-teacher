@@ -2,7 +2,6 @@ package com.example.vimteacher
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +52,7 @@ class QuestionFragment : Fragment() {
     private fun observeViewModel() {
         viewModel.currentQuestionLiveData.observe(viewLifecycleOwner) { question ->
             if (question != null) {
-                binding.questionId.text = "Question ${question.questionId}"
+                binding.questionId.text = context?.getString(R.string.question_text, question.questionId)
                 binding.questionBody.text = question.questionBody
                 setupOptions(question)
             }
@@ -70,10 +69,10 @@ class QuestionFragment : Fragment() {
         viewModel.isAnswered.observe(viewLifecycleOwner) { answered ->
             if (answered) {
                 binding.skipButton.visibility = View.GONE
-                binding.answerButton.text = "Next"
+                binding.answerButton.text = getString(R.string.next_button)
             } else {
                 binding.skipButton.visibility = View.VISIBLE
-                binding.answerButton.text = "Answer"
+                binding.answerButton.text = getString(R.string.answer_button)
             }
         }
     }

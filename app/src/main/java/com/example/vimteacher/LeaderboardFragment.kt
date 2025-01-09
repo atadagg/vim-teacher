@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.vimteacher.adapter.LeaderboardAdapter
 import com.example.vimteacher.databinding.FragmentLeaderboardBinding
-import com.example.vimteacher.model.UserModel
 import com.example.vimteacher.viewmodel.LeaderboardViewModel
 
 class LeaderboardFragment : Fragment() {

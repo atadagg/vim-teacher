@@ -10,9 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.vimteacher.adapter.QuestionAdapter
 import com.example.vimteacher.databinding.FragmentMainBinding
-import com.example.vimteacher.services.FirebaseService
-import com.example.vimteacher.viewmodel.AuthViewModel
-import com.example.vimteacher.viewmodel.AuthViewModelFactory
 import com.example.vimteacher.viewmodel.QuestionsViewModel
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -36,7 +33,7 @@ class MainFragment : Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
         setStatusBarColor()
         return binding.root
