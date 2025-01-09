@@ -40,10 +40,11 @@ class AuthViewModel(private val firebaseService: FirebaseService) : ViewModel() 
     }
 
 
+
 }
 
 sealed class AuthState {
-    data class Success(val user: FirebaseUser) : AuthState()
+    data class Success(val user: FirebaseUser?) : AuthState()
     data class Error(val message: String) : AuthState()
     object Loading : AuthState()
 }
