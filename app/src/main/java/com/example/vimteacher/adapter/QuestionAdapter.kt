@@ -2,6 +2,7 @@ package com.example.vimteacher.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -58,5 +59,8 @@ class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit, private
 
     override fun onBindViewHolder(holder: QuestionViewHolder, position: Int) {
         holder.bind(getItem(position))
+
+        val animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.fade_in)
+        holder.itemView.startAnimation(animation)
     }
 }

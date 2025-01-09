@@ -97,9 +97,8 @@ class MainFragment : Fragment(){
     }
 
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         binding.recyclerView.adapter = adapter
-
     }
 
 
