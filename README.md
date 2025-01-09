@@ -11,6 +11,7 @@ An Android application designed to help users learn Vim commands through an inte
 -   Leaderboard system to track user progress
 -   Firebase integration for user authentication and progress tracking
 -   Material Design UI with custom styling
+-   RecyclerViews with animations
 
 ## Technology Stack
 
@@ -40,22 +41,15 @@ An Android application designed to help users learn Vim commands through an inte
 -   `fragments/` - UI fragments
 
 ## Screenshots
-
-[Add screenshots here]
-
-## Database Structure
-
+![1736455500289](image/README/1736455500289.png)
+![1736455375658](image/README/1736455375658.png)
+![1736455465626](image/README/1736455465626.png)
 ### Firestore Collections:
 
 -  `users` - Tracks users (email: String, questions_solved:Int)
 - `questions` - Tracks questions (provided in the photos below)
 - `userQuestions` - Tracks solved questions (questionId: Int, userId: String)
--   
 
 ## Contributing
 
 Feel free to submit issues and pull requests.
-
-## License
-
-[Add your license here]
