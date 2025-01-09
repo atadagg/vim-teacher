@@ -18,12 +18,12 @@ class QuestionsViewModel : ViewModel() {
 
     val currentQuestionLiveData = MutableLiveData<QuestionModel>()
     val explanations = MutableLiveData<List<String>>()
-    val optionStatuses = MutableLiveData<Map<Int, String>>() // Maps optionId to "Correct" or "Incorrect"
+    val optionStatuses = MutableLiveData<Map<Int, String>>()
     val isAnswered = MutableLiveData<Boolean>().apply { value = false }
     val solvedQuestions: LiveData<Set<Int>> = _solvedQuestions
 
 
-    private var currentIndex = 0 // Index to track the current question
+    private var currentIndex = 0
 
     init {
         fetchQuestions()

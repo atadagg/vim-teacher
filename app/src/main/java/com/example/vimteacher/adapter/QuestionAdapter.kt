@@ -30,8 +30,6 @@ class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit, private
         RecyclerView.ViewHolder(binding.root) {
         fun bind(question: QuestionModel) {
             binding.questionId.text = question.questionId.toString()
-
-            // Add this new color setting logic:
             binding.root.setCardBackgroundColor(
                 binding.root.context.getColor(
                     if (solvedQuestionIds.contains(question.questionId)) {
