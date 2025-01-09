@@ -26,10 +26,76 @@ class FirebaseService {
     suspend fun registerUser(email: String, password: String): Result<FirebaseUser> {
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()
-            result.user?.let {
-                Result.success(it)
+
+            result.user?.let { user ->
+                try {
+                    createUserProfileTransaction(user.uid, email)
+                    Result.success(user)
+                } catch (e: Exception) {
+                    user.delete().await()
+                    Result.failure(e)
+                }
             } ?: Result.failure(Exception("Registration failed"))
         } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    private suspend fun createUserProfileTransaction(userId: String, email: String) {
+        db.runTransaction { transaction ->
+            val userRef = db.collection("users").document(userId)
+
+            // Check if user document already exists
+            val snapshot = transaction.get(userRef)
+            if (snapshot.exists()) {
+                throw Exception("User profile already exists")
+            }
+
+            // Create new profile
+            val userProfile = hashMapOf(
+                "email" to email,
+                "questions_solved" to 0,
+            )
+
+            transaction.set(userRef, userProfile)
+        }.await()
+    }
+
+
+    suspend fun checkAndUpdateSolvedQuestion(questionId: Int): Result<Boolean> {
+        val userId = auth.currentUser?.uid ?: return Result.failure(Exception("User not authenticated"))
+
+        return try {
+            var isNewlySolved = false
+
+            db.runTransaction { transaction ->
+                // Do ALL reads first
+                val userQuestionDoc = db.collection("userQuestions")
+                    .document("${userId}_$questionId")
+                val userDoc = db.collection("users").document(userId)
+
+                // Read operations
+                val questionSnapshot = transaction.get(userQuestionDoc)
+                val userSnapshot = transaction.get(userDoc)
+
+                // After reads, perform writes if needed
+                if (!questionSnapshot.exists()) {
+                    isNewlySolved = true
+
+                    // Now do the writes
+                    transaction.set(userQuestionDoc, hashMapOf(
+                        "userId" to userId,
+                        "questionId" to questionId,
+                    ))
+
+                    val currentCount = userSnapshot.getLong("questions_solved") ?: 0
+                    transaction.update(userDoc, "questions_solved", currentCount + 1)
+                }
+            }.await()
+
+            Result.success(isNewlySolved)
+        } catch (e: Exception) {
+            Log.e("FirebaseService", "Error updating solved question", e)
             Result.failure(e)
         }
     }
@@ -97,3 +163,5 @@ class FirebaseService {
         }
     }
 }
+
+

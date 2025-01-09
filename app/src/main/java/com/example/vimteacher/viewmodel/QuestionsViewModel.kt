@@ -50,6 +50,8 @@ class QuestionsViewModel : ViewModel() {
     fun checkAnswer(selectedOptionId: Int): Boolean {
         val currentQuestion = currentQuestionLiveData.value ?: return false
 
+        val isCorrect = selectedOptionId == currentQuestion.correctOptionId
+
         val statuses = currentQuestion.options.associate { option ->
             option.optionId to if (option.optionId == currentQuestion.correctOptionId) {
                 "Correct"
@@ -59,13 +61,27 @@ class QuestionsViewModel : ViewModel() {
         }
 
         optionStatuses.value = statuses
-
         explanations.value = currentQuestion.options.map { option ->
             "${option.optionBody}: ${option.optionDescription}"
         }
-
         isAnswered.value = true
-        return true
+
+        // If answer is correct, update the database
+        if (isCorrect) {
+            viewModelScope.launch {
+                currentQuestion.questionId?.let { questionId ->
+                    firebaseService.checkAndUpdateSolvedQuestion(questionId)
+                        .onSuccess { isNewlySolved ->
+                            Log.d("QuestionsViewModel", "Question solved status updated: $isNewlySolved")
+                        }
+                        .onFailure { exception ->
+                            Log.e("QuestionsViewModel", "Failed to update solved status", exception)
+                        }
+                }
+            }
+        }
+
+        return isCorrect
     }
 
     fun hasNextQuestion(): Boolean {
