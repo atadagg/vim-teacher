@@ -20,7 +20,7 @@
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cheat Sheet"
+                android:text="Vim Cheat Sheet"
                 android:textSize="32sp"
                 android:textColor="@color/text_color"
                 android:layout_gravity="center"
@@ -38,10 +38,11 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <!-- MOVEMENT COMMANDS -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Movement"
+                    android:text="Movement Commands"
                     android:textSize="24sp"
                     android:layout_gravity="center"
                     android:fontFamily="@font/munro"
@@ -55,7 +56,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – move the cursor left"/>
+                    android:text="h – Move cursor left"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -63,7 +64,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="j – move the cursor down"/>
+                    android:text="j – Move cursor down"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -71,7 +72,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="k – move the cursor up"/>
+                    android:text="k – Move cursor up"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -79,7 +80,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="l – move the cursor right"/>
+                    android:text="l – Move cursor right"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -87,7 +88,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="b – move to the start of a word"/>
+                    android:text="0 – Move to start of line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -95,7 +96,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="B – move to the start of a token"/>
+                    android:text="$ – Move to end of line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -103,7 +104,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="w – move to the start of the next word"/>
+                    android:text="b – Move to start of word"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -111,7 +112,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="W – move to the start of the next token"/>
+                    android:text="w – Move to start of next word"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,7 +120,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="e – move to the end of a word"/>
+                    android:text="e – Move to end of word"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -127,17 +128,26 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="E – move to the end of a token"/>
+                    android:text="gg – Go to first line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text="G – Go to last line"/>
+
+                <!-- EDITING COMMANDS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Editing Commands"
+                    android:textSize="24sp"
                     android:layout_gravity="center"
-                    android:text="Placeholder Header"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
+                    android:textStyle="bold"
                     android:paddingTop="20dp"
                     android:paddingBottom="8dp"/>
 
@@ -147,7 +157,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="i – Insert mode before cursor"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,70 +165,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="I – Insert at start of line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -226,7 +173,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="a – Append after cursor"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -234,7 +181,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="A – Append at end of line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -242,7 +189,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="o – Open new line below"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -250,7 +197,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="O – Open new line above"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -258,7 +205,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="x – Delete character"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -266,7 +213,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="dd – Delete entire line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -274,7 +221,7 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="yy – Yank (copy) line"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -282,74 +229,105 @@
                     android:textSize="20sp"
                     android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
+                    android:text="p – Paste after cursor"/>
 
+                <!-- MODES -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="20sp"
-                    android:fontFamily="@font/munro"
-                    android:textColor="@color/text_color"
-                    android:text="h – placeholder text, Lorem ipsum dolor"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Something else"
+                    android:text="Vim Modes"
                     android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/text_color"
+                    android:layout_gravity="center"
                     android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
                     android:paddingTop="20dp"
                     android:paddingBottom="8dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="bla bla"
                     android:textSize="20sp"
+                    android:fontFamily="@font/munro"
                     android:textColor="@color/text_color"
-                    android:fontFamily="@font/munro"/>
+                    android:text="ESC – Normal mode"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text="i – Insert mode"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text="v – Visual mode"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text=":q – Quit"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text=":w – Save"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text=":wq – Save and Quit"/>
+
+                <!-- ADVANCED COMMANDS -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Advanced Commands"
+                    android:textSize="24sp"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:paddingTop="20dp"
+                    android:paddingBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text="u – Undo"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text="Ctrl+r – Redo"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/munro"
+                    android:textColor="@color/text_color"
+                    android:text=". – Repeat last command"/>
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
