@@ -2,9 +2,11 @@ package com.example.vimteacher.services
 
 import android.util.Log
 import com.example.vimteacher.model.QuestionModel
+import com.example.vimteacher.model.UserModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.tasks.await
 
 class FirebaseService {
@@ -100,6 +102,32 @@ class FirebaseService {
         }
     }
 
+    suspend fun getLeaderboardUsers(): List<UserModel> {
+        return try {
+            val snapshot = db.collection("users")
+                .orderBy("questions_solved", Query.Direction.DESCENDING)
+                .get()
+                .await()
+
+            Log.d("FirebaseService", "Raw leaderboard snapshot data: ${snapshot.documents.map { it.data }}")
+
+            val leaderboardUsers = snapshot.documents.map { document ->
+                UserModel(
+                    uid = document.id,
+                    email = document.getString("email") ?: "",
+                    questions_solved = document.getLong("questions_solved")?.toInt() ?: 0
+                )
+            }
+
+            // Log the deserialized UserLeaderboardModel objects
+            Log.d("FirebaseService", "Deserialized Leaderboard Users: ${leaderboardUsers.joinToString(separator = "\n")}")
+
+            leaderboardUsers
+        } catch (e: Exception) {
+            Log.e("FirebaseService", "Error getting leaderboard users: ${e.message}")
+            emptyList()
+        }
+    }
     suspend fun getQuestions(): List<QuestionModel> {
         return try {
             val snapshot = db.collection("questions").get().await()

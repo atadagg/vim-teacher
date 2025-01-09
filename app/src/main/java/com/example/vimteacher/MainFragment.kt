@@ -27,7 +27,6 @@ class MainFragment : Fragment(){
         findNavController().navigate(MainFragmentDirections.actionMainFragmentToQuestionFragment(id = question.questionId))
     }
     private val viewModel: QuestionsViewModel by viewModels()
-    private val authViewModel: AuthViewModel by viewModels { AuthViewModelFactory() }
 
 
     override fun onCreateView(
@@ -51,6 +50,10 @@ class MainFragment : Fragment(){
     private fun setupButtons() {
         binding.buttonCheatSheet.setOnClickListener {
             findNavController().navigate(MainFragmentDirections.actionMainFragmentToCheatSheetFragment())
+        }
+
+        binding.buttonLeaderboard.setOnClickListener {
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToLeaderboardFragment())
         }
 
         // Update login/logout button based on auth state
