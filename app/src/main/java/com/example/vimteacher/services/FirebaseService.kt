@@ -146,6 +146,24 @@ class FirebaseService {
         }
     }
 
+    fun observeSolvedQuestions(userId: String, onUpdate: (Set<Int>) -> Unit) {
+        db
+            .collection("userQuestions")
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { snapshot, e ->
+                if (e != null) {
+                    Log.e("FirebaseService", "Listen failed.", e)
+                    return@addSnapshotListener
+                }
+
+                val solvedIds = snapshot?.documents?.mapNotNull {
+                    it.getLong("questionId")?.toInt()
+                }?.toSet() ?: emptySet()
+
+                onUpdate(solvedIds)
+            }
+    }
+
     //Just to make writing in firebase easier
     fun uploadQuestionsToFirebase() {
         val db = FirebaseFirestore.getInstance()

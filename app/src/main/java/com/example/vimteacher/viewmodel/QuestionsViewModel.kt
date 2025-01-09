@@ -13,12 +13,15 @@ class QuestionsViewModel : ViewModel() {
 
     private val firebaseService = FirebaseService()
     private val _allQuestionsLiveData = MutableLiveData<List<QuestionModel>>()
+    private val _solvedQuestions = MutableLiveData<Set<Int>>(setOf())
     val questions: LiveData<List<QuestionModel>> = _allQuestionsLiveData
 
     val currentQuestionLiveData = MutableLiveData<QuestionModel>()
     val explanations = MutableLiveData<List<String>>()
     val optionStatuses = MutableLiveData<Map<Int, String>>() // Maps optionId to "Correct" or "Incorrect"
     val isAnswered = MutableLiveData<Boolean>().apply { value = false }
+    val solvedQuestions: LiveData<Set<Int>> = _solvedQuestions
+
 
     private var currentIndex = 0 // Index to track the current question
 
@@ -116,6 +119,12 @@ class QuestionsViewModel : ViewModel() {
             isAnswered.value = false
             optionStatuses.value = emptyMap()
             explanations.value = emptyList()
+        }
+    }
+
+    fun observeSolvedQuestions(userId: String) {
+        firebaseService.observeSolvedQuestions(userId) { solvedIds ->
+            _solvedQuestions.value = solvedIds
         }
     }
 }

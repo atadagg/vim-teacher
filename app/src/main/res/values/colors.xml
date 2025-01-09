@@ -9,6 +9,10 @@
     <!-- Text Colors -->
     <color name="text_color">#FFFFFF</color>
 
+    <!-- Questions Solved -->
+    <color name="question_solved">#4CAF50</color>  <!-- Green -->
+    <color name="question_unsolved">#FFC107</color>  <!-- Yellow -->
+
     <!-- Additional Greens -->
     <color name="forest_green">#204134</color>
     <color name="emerald_green">#019833</color>

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.vimteacher.R
 import com.example.vimteacher.databinding.QuestionItemLayoutBinding
 import com.example.vimteacher.model.QuestionModel
 
@@ -18,17 +19,33 @@ class QuestionDiffCallback : DiffUtil.ItemCallback<QuestionModel>() {
     }
 }
 
-class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit ) : ListAdapter<QuestionModel, QuestionAdapter.QuestionViewHolder>(QuestionDiffCallback()){
+class QuestionAdapter( private val onItemClick: (QuestionModel) -> Unit, private var solvedQuestionIds: Set<Int> = emptySet() ) : ListAdapter<QuestionModel, QuestionAdapter.QuestionViewHolder>(QuestionDiffCallback()){
 
+    fun setSolvedQuestions(newSolvedIds: Set<Int>) {
+        solvedQuestionIds = newSolvedIds
+        notifyDataSetChanged()
+    }
 
     inner class QuestionViewHolder(private val binding: QuestionItemLayoutBinding) :
-        RecyclerView.ViewHolder(binding.root){
-            fun bind(question: QuestionModel){
-                binding.questionId.text = question.questionId.toString()
-                itemView.setOnClickListener {
-                    onItemClick(question)
-                }
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(question: QuestionModel) {
+            binding.questionId.text = question.questionId.toString()
+
+            // Add this new color setting logic:
+            binding.root.setCardBackgroundColor(
+                binding.root.context.getColor(
+                    if (solvedQuestionIds.contains(question.questionId)) {
+                        R.color.question_solved
+                    } else {
+                        R.color.question_unsolved
+                    }
+                )
+            )
+
+            itemView.setOnClickListener {
+                onItemClick(question)
             }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QuestionViewHolder {

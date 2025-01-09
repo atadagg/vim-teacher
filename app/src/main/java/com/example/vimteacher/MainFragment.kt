@@ -23,9 +23,12 @@ class MainFragment : Fragment(){
     private var authStateListener: FirebaseAuth.AuthStateListener? = null
 
 
-    private val adapter = QuestionAdapter { question ->
-        findNavController().navigate(MainFragmentDirections.actionMainFragmentToQuestionFragment(id = question.questionId))
-    }
+    private val adapter = QuestionAdapter(
+        onItemClick = { question ->
+            findNavController().navigate(MainFragmentDirections.actionMainFragmentToQuestionFragment(id = question.questionId))
+        },
+        solvedQuestionIds = setOf()
+    )
     private val viewModel: QuestionsViewModel by viewModels()
 
 
@@ -45,6 +48,9 @@ class MainFragment : Fragment(){
         observeViewModel()
         observeAuthState()
         setupButtons()
+        FirebaseAuth.getInstance().currentUser?.let { user ->
+            viewModel.observeSolvedQuestions(user.uid)
+        }
     }
 
     private fun setupButtons() {
@@ -61,6 +67,7 @@ class MainFragment : Fragment(){
             if (FirebaseAuth.getInstance().currentUser != null) {
                 FirebaseAuth.getInstance().signOut()
                 updateLoginButton(false)
+                adapter.setSolvedQuestions(emptySet())
                 Snackbar.make(
                     binding.root,
                     "Successfully logged out",
@@ -99,9 +106,13 @@ class MainFragment : Fragment(){
     }
 
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         viewModel.questions.observe(viewLifecycleOwner) { questions ->
             adapter.submitList(questions)
+        }
+
+        viewModel.solvedQuestions.observe(viewLifecycleOwner) { solvedQuestions ->
+            adapter.setSolvedQuestions(solvedQuestions)
         }
     }
 
