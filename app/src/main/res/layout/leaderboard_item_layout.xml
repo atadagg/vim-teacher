@@ -1,54 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:padding="16dp">
+    android:layout_marginBottom="8dp"
+    app:cardBackgroundColor="@color/charcoal_gray"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:cardPreventCornerOverlap="true"
+    app:strokeColor="@color/primary_color"
+    app:strokeWidth="1dp">
 
-    <TextView
-        android:id="@+id/rankTextView"
-        android:layout_width="50dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/munro"
-        android:textColor="@color/text_color"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="#1" />
-
-    <TextView
-        android:id="@+id/usernameTextView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/munro"
-        android:textColor="@color/text_color"
-        android:textSize="24sp"
-        app:layout_constraintStart_toEndOf="@id/rankTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/questionsSolvedTextView"
-        tools:text="Username" />
-
-    <TextView
-        android:id="@+id/questionsSolvedTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/munro"
-        android:textColor="@color/text_color"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="10 questions" />
-
-    <View
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/primary_color"
-        app:layout_constraintTop_toBottomOf="@id/usernameTextView"/>
+        android:layout_height="wrap_content"
+        android:padding="16dp">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/rankTextView"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/munro"
+            android:textColor="@color/accent_color"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="#1" />
+
+        <TextView
+            android:id="@+id/usernameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:fontFamily="@font/munro"
+            android:textColor="@color/text_color"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/rankTextView"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/questionsSolvedTextView"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/questionsSolvedTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/munro"
+            android:textColor="@color/secondary_color"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10 questions" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
