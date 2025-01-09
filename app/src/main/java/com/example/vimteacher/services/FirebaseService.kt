@@ -130,15 +130,13 @@ class FirebaseService {
     }
     suspend fun getQuestions(): List<QuestionModel> {
         return try {
-            val snapshot = db.collection("questions").get().await()
+            val snapshot = db.collection("questions")
+                .orderBy("questionId")
+                .get()
+                .await()
 
-            // Log the raw snapshot data
-            Log.d("FirebaseService", "Raw snapshot data: ${snapshot.documents.map { it.data }}")
-
-            // Deserialize to QuestionModel list
             val questions = snapshot.toObjects(QuestionModel::class.java)
 
-            // Log the deserialized QuestionModel objects
             Log.d("FirebaseService", "Deserialized QuestionModels: ${questions.joinToString(separator = "\n")}")
 
             questions

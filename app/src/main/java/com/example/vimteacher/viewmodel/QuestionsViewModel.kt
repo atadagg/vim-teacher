@@ -30,8 +30,7 @@ class QuestionsViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 val questionsList = firebaseService.getQuestions()
-                val sortedQuestionsList = questionsList.sortedBy { it.questionId }
-                _allQuestionsLiveData.value = sortedQuestionsList
+                _allQuestionsLiveData.value = questionsList
 
             } catch (e: Exception) {
                 Log.e("QuestionsViewModel", "Error fetching questions from Firebase", e)
